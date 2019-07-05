@@ -13,8 +13,9 @@ $(document).ready(function() {
   $("#nameForm").submit(function(event){
 
     let nameInput = $("#name").val();
-    console.log("nameInput: " + nameInput);
+
     let newUrl = resource_url + "&name=" + nameInput;
+    console.log("newurl: " + newUrl);
     // let long = parseFloat($("#userLong").val());
     // let lat = parseFloat($("#userLat").val());
     // // placeholder clouds
@@ -32,6 +33,7 @@ $(document).ready(function() {
     $.get(newUrl).then(function(response){
       let a = response;
       console.log(response);
+      displayDoctorsInfo(response);
 
     }).fail(function(error){
       console.log("there was an error: ");
@@ -41,12 +43,12 @@ $(document).ready(function() {
   });
   $("#symptomsForm").submit(function(event){
     let symptomsInput = $("#symptoms").val();
-    console.log("symptomsInput: " + symptomsInput);
     let newUrl = resource_url + "&query=" + symptomsInput;
-
+    console.log("newurl: " + newUrl);
     $.get(newUrl).then(function(response){
       let a = response;
       console.log(response);
+      displayDoctorsInfo(response);
 
     }).fail(function(error){
       console.log("there was an error: ");
@@ -56,3 +58,11 @@ $(document).ready(function() {
     event.preventDefault();
   });
 });
+
+function displayDoctorsInfo(response){
+  let doctorArray = response.data;
+  doctorArray.forEach(function(doctor){
+    console.log(doctor.profile.name + ": " + doctor.profile.bio);
+  //  console.log(doctor.profile.practices.location_slug);
+  });
+}

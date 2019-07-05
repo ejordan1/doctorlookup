@@ -1,18 +1,58 @@
 /*  Styles! */
+.container{
+  float: left;
+  margin-left: 6% !important;
+}
+
 #displayCard {
+  float: left;
   align-items: center;
   text-align: center;
-  width: 85vw;
-  height: 85vh;
-  margin-top: 10%;
+  width: 200px;
 
+  height: 100vh;
+  margin-top: 10%;
+  color: white;
+}
+
+.doctorCard{
+  float: left;
 }
 
 #imageRow {
-  height: 500px;
+
 }
 
 #userInputForm {
 
 
 }
+
+.searchTitle{
+  margin: 30px;
+  margin-top: 200px;
+  font-size: 20px;
+}
+
+.searchForm{
+  margin: 20px;
+}
+
+.mainColumn{
+  width: auto;
+  background-color: lightblue !important;
+  height: 100vh;
+  margin-left: 200px;
+  margin-top: 10%;
+  text-align: center;
+}
+
+.bookTitle{
+  padding-top: 100px;
+  font-size: 40px;
+}
+
+/* .flexContainer{
+  display: flex;
+
+} */
