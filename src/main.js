@@ -17,43 +17,54 @@ var resource_url = `https://api.betterdoctor.com/2016-03-01/doctors?location=or-
 $(document).ready(function() {
     $(".doctorCard").hide();
     $(".endPage").hide();
+    $(".noPages").hide();
+    $(".leftArrow").hide();
 
   $("#nameForm").submit(function(event){
+    $(".error").text("");
     currentPage = -1;
     let nameInput = $("#name").val();
-    $(".bookTitle").text("The Doctor " + nameInput + " Book");
+    $("#name").val("");
+    $(".bookTitle").text("The Portland Doctor " + nameInput + " Book");
     let newUrl = resource_url + "&name=" + nameInput;
-    console.log("newurl: " + newUrl);
     $.get(newUrl).then(function(response){
 
-      console.log(response);
       clientDoctorArray = response.data;
+      if (clientDoctorArray.length > 0){
+        updatePage();
+        $(".noPages").hide();
+      } else {
+        $(".noPages").show();
+      }
 
-      updatePage();
     }).fail(function(error){
-      console.log("there was an error: ");
-    })
+      $(".error").text("There was an error processing your search request" + error.message);
+    });
     event.preventDefault();
   });
   $("#symptomsForm").submit(function(event){
+      $(".error").text("");
     currentPage = -1;
     updatePage();
     let symptomsInput = $("#symptoms").val();
-    $(".bookTitle").text("The Doctors of " + symptomsInput + " Book");
+    $("#symptoms").val("");
+    $(".bookTitle").text("The Portland Doctors of " + symptomsInput + " Book");
     let newUrl = resource_url + "&query=" + symptomsInput;
     console.log("newurl: " + newUrl);
     $.get(newUrl).then(function(response){
       let a = response;
       console.log(response);
       clientDoctorArray = response.data;
-      if (response.data.length >= 1){
-      displayDoctorsInfo(currentPage);
+      if (clientDoctorArray.length > 0){
+        updatePage();
+        $(".noPages").hide();
+      } else {
+        $(".noPages").show();
       }
       //else : NO DOCTORS WITH SEARCH PROVIDED
 
     }).fail(function(error){
-      console.log("there was an error: ");
-
+        $(".error").text("There was an error processing your search request: " + error.message);
     })
 
     event.preventDefault();
@@ -61,7 +72,7 @@ $(document).ready(function() {
   $(".rightArrow button").click(function(){
 
     if (currentPage === clientDoctorArray.length){
-      alert("that was the last page");
+      alert("somehow got to after the last page. whoops");
     } else {
 
         currentPage++;
@@ -71,6 +82,7 @@ $(document).ready(function() {
   $(".leftArrow button").click(function(){
 
     if (currentPage === -1){
+        alert("somehow got to before the first page. whoops");
     } else {
         currentPage--;
     }
