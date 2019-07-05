@@ -2,6 +2,7 @@
 .container{
   float: left;
   margin-left: 6% !important;
+  height: 85vh;
 }
 
 #displayCard {
@@ -10,8 +11,8 @@
   text-align: center;
   width: 200px;
 
-  height: 100vh;
-  margin-top: 10%;
+  height: 85vh;
+  margin-top: 7%;
   color: white;
 }
 
@@ -25,8 +26,8 @@
 
 #userInputForm {
 
-
 }
+
 
 .searchTitle{
   margin: 30px;
@@ -43,8 +44,10 @@
   background-color: lightblue !important;
   height: 100vh;
   margin-left: 200px;
-  margin-top: 10%;
+  margin-top: 7%;
   text-align: center;
+
+  height: 85vh;
 }
 
 .bookTitle{

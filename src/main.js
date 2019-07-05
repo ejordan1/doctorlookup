@@ -4,7 +4,10 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import linesImage from './../img/Booklines.png';
 
+let lines = document.getElementById("lines");
+lines.src = linesImage;
 
 
 var resource_url = `https://api.betterdoctor.com/2016-03-01/doctors?location=or-portland&limit=1000&user_key=${process.env.exports.apiKey}`;
