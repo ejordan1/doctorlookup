@@ -5,6 +5,7 @@ import 'bootstrap';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import linesImage from './../img/Booklines.png';
+import {getCall} from './backend.js';
 
 let lines = document.getElementById("lines");
 lines.src = linesImage;
@@ -12,7 +13,7 @@ lines.src = linesImage;
 let clientDoctorArray = [];
 let currentPage = -1;
 
-var resource_url = `https://api.betterdoctor.com/2016-03-01/doctors?location=or-portland&limit=1000&user_key=${process.env.exports.apiKey}`;
+
 // import 'bootstrap/dist/css/bootstrap.min.css';
 $(document).ready(function() {
     $(".doctorCard").hide();
@@ -28,7 +29,7 @@ $(document).ready(function() {
     $(".bookTitle").text("The Portland Doctor " + nameInput + " Book");
     let newUrl = resource_url + "&name=" + nameInput;
     $.get(newUrl).then(function(response){
-
+     // getCall(newUrl).then(function(response){
       clientDoctorArray = response.data;
       if (clientDoctorArray.length > 0){
         updatePage();
