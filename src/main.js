@@ -5,7 +5,7 @@ import 'bootstrap';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import linesImage from './../img/Booklines.png';
-import {getCall} from './backend.js';
+import {getNameCall, getSymptomCall} from './backend.js';
 
 let lines = document.getElementById("lines");
 lines.src = linesImage;
@@ -13,6 +13,7 @@ lines.src = linesImage;
 let clientDoctorArray = [];
 let currentPage = -1;
 
+var resource_url = 'https://api.betterdoctor.com/2016-03-01/doctors?location=37.773,-122.413,100&user_key=' + `${process.env.exports.apiKey}`;
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
 $(document).ready(function() {
@@ -28,8 +29,8 @@ $(document).ready(function() {
     $("#name").val("");
     $(".bookTitle").text("The Portland Doctor " + nameInput + " Book");
     let newUrl = resource_url + "&name=" + nameInput;
-    $.get(newUrl).then(function(response){
-     // getCall(newUrl).then(function(response){
+    console.log("URL: " + newUrl);
+      getNameCall(nameInput).then(function(response){
       clientDoctorArray = response.data;
       if (clientDoctorArray.length > 0){
         updatePage();
@@ -52,7 +53,7 @@ $(document).ready(function() {
     $(".bookTitle").text("The Portland Doctors of " + symptomsInput + " Book");
     let newUrl = resource_url + "&query=" + symptomsInput;
     console.log("newurl: " + newUrl);
-    $.get(newUrl).then(function(response){
+    getSymptomCall(symptomsInput).then(function(response){
       let a = response;
       console.log(response);
       clientDoctorArray = response.data;
